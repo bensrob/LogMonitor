@@ -11,8 +11,8 @@ build/%.o: 	src/%.cpp $(DEP)
 		$(CC) -c $< -o $@
 
 clean:
-		rm bin/logmonitor
-		rm build/*.o
+		rm bin/logmonitor -f
+		rm build/*.o -f
 		make logmonitor
 
 
