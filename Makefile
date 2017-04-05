@@ -1,12 +1,14 @@
-CC=g++ -Wall -o $@ -pthread
-DEP=main.h ctail.h threads.h monitor.h
-OBJ=main.o ctail.o threads.o monitor.o
+CC=g++ -Wall -pthread -o $@
+INC=include/
+BUI=build/
+DEP=$(INC)main.h $(INC)ctail.h $(INC)threads.h $(INC)monitor.h
+OBJ=$(BUI)main.o $(BUI)ctail.o $(BUI)threads.o $(BUI)monitor.o
 
-main: $(OBJ)
-	$(CC) $(OBJ)
+logmonitor:	$(OBJ)
+		$(CC) $(OBJ)
 
-%.o: %.cpp $(DEP)
-	$(CC) -c $<
+build/%.o: 	%.cpp $(DEP)
+		$(CC) -c $<
 
 
 

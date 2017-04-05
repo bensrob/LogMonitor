@@ -1,6 +1,6 @@
-#include "main.h"
-#include "ctail.h"
-#include "threads.h"
+#include "include/main.h"
+#include "include/ctail.h"
+#include "include/threads.h"
 
 
 //Vector of all ctails
