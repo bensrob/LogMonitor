@@ -5,6 +5,8 @@
 	#include <string.h>
 	#include <vector>
 
+	#include "../include/monitor.h"
+
 	#define EVENT_SIZE	( sizeof (struct inotify_event) )
 	#define BUF_LEN		( 1024 * ( EVENT_SIZE + 16 ) )
 
@@ -18,6 +20,7 @@
 	        ctail(std::string location);
 		void init();
 	        std::vector<std::string> watch();
+		std::vector<monitor> monitors;
 		~ctail();
 	};
 

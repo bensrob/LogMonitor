@@ -10,7 +10,10 @@ logmonitor:	$(OBJ)
 build/%.o: 	src/%.cpp $(DEP)
 		$(CC) -c $< -o $@
 
-
+clean:
+		rm bin/logmonitor
+		rm build/*.o
+		make logmonitor
 
 
 
