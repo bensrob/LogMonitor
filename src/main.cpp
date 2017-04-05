@@ -1,6 +1,6 @@
-#include "include/main.h"
-#include "include/ctail.h"
-#include "include/threads.h"
+#include "../include/main.h"
+#include "../include/ctail.h"
+#include "../include/threads.h"
 
 
 //Vector of all ctails
@@ -27,6 +27,8 @@ int main()
 	std::vector<std::string> loglocs;
 	loglocs.push_back("/var/log/syslog");
 	loglocs.push_back("/var/log/fail2ban.log");
+	loglocs.push_back("/var/log/auth.log");
+
 
 	//Create new ctail per logfile
 	for( std::vector<std::string>::iterator it = loglocs.begin(); it != loglocs.end(); it++ )	logfiles.emplace_back( *it );

@@ -1,4 +1,4 @@
-#include "include/threads.h"
+#include "../include/threads.h"
 
 //When true threads will stop working and close
 bool threadkiller = false;
