@@ -1,8 +1,6 @@
 CC=g++ -Wall -pthread
-INC=include/
-BUI=build/
-DEP=$(INC)main.h $(INC)ctail.h $(INC)threads.h $(INC)monitor.h
-OBJ=$(BUI)main.o $(BUI)ctail.o $(BUI)threads.o $(BUI)monitor.o
+DEP=include/*
+OBJ=$(patsubst src/%.cpp,build/%.o,$(wildcard src/*.cpp))
 
 logmonitor:	$(OBJ)
 		$(CC) $(OBJ) -o bin/$@
@@ -11,8 +9,8 @@ build/%.o: 	src/%.cpp $(DEP)
 		$(CC) -c $< -o $@
 
 clean:
-		rm bin/logmonitor -f
-		rm build/*.o -f
+		@rm bin/* -f	|| true
+		@rm build/* -f	|| true
 		make logmonitor
 
 
