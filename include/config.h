@@ -4,7 +4,7 @@
 
 	struct cfile
 	{
-		cfile( int n, int l, unsigned char *d)
+		cfile( std::string n, int l, unsigned char *d)
 		{
 			this->name 	= n;
 			this->len	= l;
@@ -12,7 +12,8 @@
 			this->data	= d;
 			delete d;
 		}
-		~cfile(){
+		~cfile()
+		{
 			delete data;
 		}
 		unsigned int 	len;
@@ -20,12 +21,11 @@
 		unsigned char 	*data;
 	};
 
-	struct configfiles
+	struct config
 	{
-		std::vector<cfile> cfiles;
-		void add( int n, int l, unsigned char *d)
-		{
-		}
+		std::vector<cfile> *defaults;
+		config();
+		~config();
 	};
 
 	#define CONFIG
