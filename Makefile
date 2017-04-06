@@ -10,8 +10,8 @@ build/%.o: 	src/%.cpp $(DEP)
 		$(CC) $< -c
 
 clean:
-		@rm bin/* -f	|| true
-		@rm build/* -f	|| true
+		@rm bin/* -fr	|| true
+		@rm build/* -fr	|| true
 		@make
 
 
