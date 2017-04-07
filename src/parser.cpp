@@ -2,7 +2,7 @@
 
 void parser::getConfig( std::string filename )
 {
-	this->section = "general";
+	this->section = "ERROR";
 
 	std::ifstream file( filename.c_str() );
 	if( file.is_open() )
@@ -30,16 +30,17 @@ void parser::setDefaults(){
 		if( it->second.count 	== 0 )		it->second.count =	this->options["general"].count;
 		if( it->second.listentime == 0 )	it->second.listentime =	this->options["general"].listentime;
 		if( it->second.permanent == 0 )		it->second.permanent =	this->options["general"].permanent;
+                if( it->second.regex.empty()  )         it->second.regex =	this->options["general"].regex;
+                if( it->second.ignore.empty() )         it->second.ignore =	this->options["general"].ignore;
+                if( it->second.ignoreip.empty() )       it->second.ignoreip =	this->options["general"].ignoreip;
 	}
 }
 
 //Check all required variables are set
 void parser::checkState()
 {
-	std::cout << "How many maps:	" << this->options.size() << std::endl;
         for( std::map<std::string,monitor>::iterator it = this->options.begin(); it!=this->options.end(); it++ )
         {
-		std::cout << "IT'S RUNNING" << std::endl;
 		it->second.functional = true;
 
 		if( it->second.protocol.empty() )       it->second.functional = false;
@@ -49,6 +50,9 @@ void parser::checkState()
                 if( it->second.count      < 1 )         it->second.functional = false;
                 if( it->second.listentime < 1 )         it->second.functional = false;
                 if( it->second.permanent  < 0 )         it->second.functional = false;
+		if( it->second.regex.empty()  )		it->second.functional = false;
+		if( it->second.ignore.empty() )         it->second.functional = false;
+		if( it->second.ignoreip.empty() )       it->second.functional = false;
         }
 }
 
@@ -91,11 +95,32 @@ void parser::getCommands( std::vector<std::string> words )
 	else if( words[0] == "count" )		this->options[this->section].count	= std::stoi( words[1] );
 	else if( words[0] == "listentime" )	this->options[this->section].listentime	= std::stoi( words[1] );
 	else if( words[0] == "permanent" )	this->options[this->section].permanent	= std::stoi( words[1] );
+	else if( words[0] == "regex" )
+	{
+		std::string temp;
+		for( std::vector<std::string>::iterator it = ++(words.begin()); it!=words.end(); it++ )
+		{
+			temp += " " + *it;
+		}
+		this->options[this->section].regex.push_back( temp );
+	}
+        else if( words[0] == "ignore" )
+        {
+		std::string temp;
+                for( std::vector<std::string>::iterator it = ++(words.begin()); it!=words.end(); it++ )
+                {
+                        temp += " " + *it;
+                }
+                this->options[this->section].ignore.push_back( temp );
+        }
+        else if( words[0] == "ignoreip" )
+        {
+        }
 }
 
 
 parser::parser(){
-	this->section = "general";
+	this->section = "ERROR";
 }
 
 
