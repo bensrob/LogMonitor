@@ -17,6 +17,8 @@
 		std::vector<std::string> getWords( char *input );
 		void 			 getCommands( std::vector<std::string> words );
 		void			 getConfig( std::string filename );
+		void			 setDefaults();
+		void			 checkState();
 	};
 
 	#define PARSER
