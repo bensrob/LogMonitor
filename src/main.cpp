@@ -30,6 +30,9 @@ int main()
 	conf->createDefaults();
 	delete conf;
 
+	parser p;
+	p.getConfig( "monitors.conf" );
+
 	//List of log files to follow
 	std::vector<std::string> loglocs;
 	loglocs.push_back("/var/log/syslog");
