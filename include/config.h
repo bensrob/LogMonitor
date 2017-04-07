@@ -10,11 +10,6 @@
 			this->len	= l;
 			this->data	= new unsigned char [this->len];
 			this->data	= d;
-			delete d;
-		}
-		~cfile()
-		{
-			delete data;
 		}
 		unsigned int 	len;
 		std::string	name;
@@ -26,6 +21,12 @@
 		std::vector<cfile> *defaults;
 		config();
 		~config();
+		void createDefaults()
+		{
+			for( std::vector<cfile>::iterator it = defaults->begin(); it != defaults->end(); it++)
+			{
+			}
+		}
 	};
 
 	#define CONFIG

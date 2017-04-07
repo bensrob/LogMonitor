@@ -2,6 +2,7 @@
 #include "../include/ctail.h"
 #include "../include/threads.h"
 #include "../include/monitor.h"
+#include "../include/config.h"
 
 //Vector of all ctails
 std::vector<ctail> logfiles;
@@ -22,6 +23,11 @@ int main()
 {
 	//Catch interupt signal and begin cleanup
 	signal(SIGINT, cleanup);
+
+	//Create default config
+	config *conf = new config;
+	conf->createDefaults();
+	delete conf;
 
 	//List of log files to follow
 	std::vector<std::string> loglocs;
