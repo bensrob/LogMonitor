@@ -24,8 +24,9 @@ struct monitor
 
 	std::vector<std::string> ignore;	//Regex to ignore
 
-	std::vector<int>	 ignoreip;	//Ip addresses to ignore.  Only stores
+	std::vector<unsigned int> ignoreip;	//Ip addresses to ignore.  Only stores
 						//network bits to '&' with detected
+
 	bool			functional;	//Does the monitor have all the settings set correctly
 
 	monitor(): port(0), bantime(0), count(0), listentime(0), permanent(0), functional(false) {}
