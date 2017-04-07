@@ -9,7 +9,9 @@ void parser::getConfig( std::string filename )
 		{
 			char buffer[1024];
 			file.getline( buffer, 1024 );
-			std::cout << buffer << std::endl;
+			std::vector<std::string> words = getWords( buffer );
+
+			for(int i=0; i!=words.size(); i++)  std::cout << words[i] << std::endl;
 		}
 	}
 }
@@ -22,8 +24,13 @@ std::vector<std::string> parser::getWords( char *input )
 	std::vector<std::string> words;
 	while( ss >> buffer )
 	{
-		if( buffer.at(0) == '#' )       break;
-		if( buffer.at(0) != '=' )       words.push_back(buffer);
+		if( buffer.size() > 0 )
+		{
+			if( buffer.front() == '#' )	break;
+			if( buffer.front() == '=' )	buffer = buffer.substr( 1, buffer.size()-1 );
+			if( buffer.back () == '=' )	buffer.pop_back();
+			if( buffer.size() > 0 )		words.push_back(buffer);
+		}
 	}
 	return words;
 }
@@ -77,4 +84,3 @@ parser::parser(){
 
 
 parser::~parser(){}
-
