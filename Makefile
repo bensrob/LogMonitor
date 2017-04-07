@@ -10,8 +10,8 @@ build/%.o: 	src/%.cpp $(DEP)
 		$(CC) $< -c
 
 clean:
-		rm bin/* -fr	|| true
-		rm build/* -fr	|| true
+		sudo rm bin/*   -fr	|| true
+		sudo rm build/* -fr	|| true
 		bash -c "./scripts/defaults.sh"
 		@make
 
