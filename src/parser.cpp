@@ -1,6 +1,16 @@
 #include "../include/parser.h"
 
-void parser::getConfig( std::string filename )
+void getConfig( std::vector<std::string> files )
+{
+	for( std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++ )
+	{
+		getFile( *it );
+	}
+	this->setDefaults();
+	this->checkState();
+}
+
+void parser::getFile( std::string filename )
 {
 	this->section = "ERROR";
 
@@ -14,9 +24,6 @@ void parser::getConfig( std::string filename )
 			getCommands( getWords( buffer ) );
 		}
 	}
-
-	this->setDefaults();
-	this->checkState();
 }
 
 //Set defaults after all configs have been read as order not guaranteed

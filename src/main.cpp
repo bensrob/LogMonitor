@@ -1,10 +1,8 @@
 #include "../include/main.h"
 #include "../include/ctail.h"
 #include "../include/threads.h"
-#include "../include/monitor.h"
 #include "../include/config.h"
 #include "../include/parser.h"
-#include "../include/ipaddress.h"
 
 //Vector of all ctails
 std::vector<ctail> logfiles;
@@ -31,13 +29,9 @@ int main()
 	conf->createDefaults();
 	delete conf;
 
-	parser p;
-	p.getConfig( "monitors.conf" );
-
-	ipaddress ip;
-	std::cout << ip.convert("216.58.201.35") << "\n";
-	std::cout << ip.convert("192.6.1.24/23") << "\n";
-	std::cout << ip.convert("192.6.1.24/24") << "\n";
+	std::vector<std::string> files;
+	files.push_back( "monitors.conf" );
+	parser p.getConfig( files );
 
 	//List of log files to follow
 	std::vector<std::string> loglocs;

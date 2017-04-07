@@ -5,6 +5,7 @@
 	#include <map>
 	#include <fstream>
 	#include "../include/monitor.h"
+	#include "../include/ipaddress.h"
 
 	struct parser
 	{
@@ -16,7 +17,8 @@
 
 		std::vector<std::string> getWords( char *input );
 		void 			 getCommands( std::vector<std::string> words );
-		void			 getConfig( std::string filename );
+		void			 getConfig( std::vector<std::string> files );
+		void			 getFile( std::string filename );
 		void			 setDefaults();
 		void			 checkState();
 	};
