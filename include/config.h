@@ -29,12 +29,17 @@
 		{
 			for( std::vector<cfile>::iterator it = defaults->begin(); it != defaults->end(); it++)
 			{
-				std::ofstream output(it->name.c_str());
-				if( output.is_open() )
+				std::ifstream input(it->name.c_str());
+				if( !input.is_open() )
 				{
-					output.write((char*)it->data, it->len);
-					output.close();
+					std::ofstream output(it->name.c_str());
+					if( output.is_open() )
+					{
+						output.write((char*)it->data, it->len);
+						output.close();
+					}
 				}
+				else input.close();
 			}
 		}
 	};
