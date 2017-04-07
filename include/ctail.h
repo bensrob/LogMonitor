@@ -12,14 +12,14 @@
 
 	struct ctail
 	{
-	        int fd;
-	        int wd;
-	        std::string loc;
-	        std::ifstream log;
+		int fd;
+		int wd;
+		std::string loc;
+		std::ifstream log;
 		ctail(const ctail &in);
-	        ctail(std::string location);
+		ctail(std::string location);
 		void init();
-	        std::vector<std::string> watch();
+		std::vector<std::string> watch();
 		std::vector<monitor> monitors;
 		~ctail();
 	};

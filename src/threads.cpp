@@ -16,16 +16,16 @@ void logthread( ctail *logfile )
 
 		//If not indicated to close
 		//Prevents potentially utilising already freed ctails
-                if( !threadkiller )
+		if( !threadkiller )
 		{
 			//For each discovered log
 			for(    std::vector<std::string>::iterator it = logs.begin();   \
-	                        it != logs.end();                                       \
-	                        it++            )
-	                {
+				it != logs.end();				       \
+				it++	    )
+			{
 				//Output log content
-	                        std::cout << *it << "\n";
-	                }
+				std::cout << *it << "\n";
+			}
 		}
 	}
 }

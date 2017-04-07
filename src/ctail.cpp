@@ -13,7 +13,7 @@ ctail::ctail(const ctail &in){
 
 void ctail::init(){
 	this->log.open(this->loc);
-	//if( !*this->log.is_open() )        exit(1);
+	//if( !*this->log.is_open() )	exit(1);
 	this->log.seekg(0,std::ios_base::end);
 	this->fd = inotify_init();
        	//if( fd < 0 )    exit(2);
