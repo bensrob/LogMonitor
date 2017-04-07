@@ -1,6 +1,6 @@
 #include "../include/parser.h"
 
-void parser::getConfig( std::vector<std::string> files )
+std::map<std::string,monitor> parser::getConfig( std::vector<std::string> files )
 {
 	for( std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++ )
 	{
@@ -8,6 +8,20 @@ void parser::getConfig( std::vector<std::string> files )
 	}
 	this->setDefaults();
 	this->checkState();
+
+	//Remove all monitors with incomplete configuration
+	std::map<std::string,monitor>::iterator it = this->options.begin();
+	while( it != this->options.end() )
+	{
+		if( !it->second.functional )
+		{
+			this->options.erase (it);
+			it = this->options.begin();
+		}
+		else it++;
+	}
+
+	return this->options;
 }
 
 void parser::getFile( std::string filename )
@@ -58,8 +72,6 @@ void parser::checkState()
                 if( it->second.listentime < 1 )         it->second.functional = false;
                 if( it->second.permanent  < 0 )         it->second.functional = false;
 		if( it->second.regex.empty()  )		it->second.functional = false;
-		if( it->second.ignore.empty() )         it->second.functional = false;
-		if( it->second.ignoreip.empty() )       it->second.functional = false;
         }
 }
 
@@ -122,6 +134,11 @@ void parser::getCommands( std::vector<std::string> words )
         }
         else if( words[0] == "ignoreip" )
         {
+		ipaddress ip;
+                for( std::vector<std::string>::iterator it = ++(words.begin()); it!=words.end(); it++ )
+                {
+			this->options[this->section].ignoreip.push_back( ip.convert( *it ) );
+                }
         }
 }
 
