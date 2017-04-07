@@ -1,5 +1,4 @@
-CC=g++ -Wall -pthread -o $@	
-
+CC=g++ -Wall -pthread -g -o $@	
 DEP=include/*
 OBJ=$(patsubst src/%.cpp,build/%.o,$(wildcard src/*.cpp))
 
@@ -14,6 +13,4 @@ clean:
 		sudo rm build/* -fr	|| true
 		bash -c "./scripts/defaults.sh"
 		@make
-
-
 

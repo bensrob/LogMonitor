@@ -5,12 +5,15 @@
 
 	struct cfile
 	{
-		cfile( std::string n, int l, unsigned char *d)
+		cfile( std::string n, unsigned int l, unsigned char *d)
 		{
 			this->name 	= n;
 			this->len	= l;
 			this->data	= new unsigned char [this->len];
-			this->data	= d;
+			for( unsigned int i = 0; i!=this->len; i++ )
+			{
+				this->data[i] = d[i];
+			}
 		}
 		unsigned int 	len;
 		std::string	name;
