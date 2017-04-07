@@ -3,6 +3,7 @@
 #include "../include/threads.h"
 #include "../include/monitor.h"
 #include "../include/config.h"
+#include "../include/parser.h"
 
 //Vector of all ctails
 std::vector<ctail> logfiles;
