@@ -1,6 +1,6 @@
 #include "../include/parser.h"
 
-void getConfig( std::vector<std::string> files )
+void parser::getConfig( std::vector<std::string> files )
 {
 	for( std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++ )
 	{

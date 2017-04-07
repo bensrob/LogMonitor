@@ -31,7 +31,8 @@ int main()
 
 	std::vector<std::string> files;
 	files.push_back( "monitors.conf" );
-	parser p.getConfig( files );
+	parser p;
+	p.getConfig( files );
 
 	//List of log files to follow
 	std::vector<std::string> loglocs;
