@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 struct monitor
 {
@@ -30,6 +31,8 @@ struct monitor
 	bool			functional;	//Does the monitor have all the settings set correctly
 
 	monitor(): port(0), bantime(0), count(0), listentime(0), permanent(0), functional(false) {}
+
+	void print();
 };
 
 #define MONITOR

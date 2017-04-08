@@ -1,7 +1,9 @@
 #include "../include/parser.h"
 
-std::map<std::string,monitor> parser::getConfig( std::vector<std::string> files )
+std::map<std::string,monitor> parser::getConfig()
 {
+	std::vector<std::string> files = findfiles();
+
 	for( std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++ )
 	{
 		getFile( *it );
@@ -106,7 +108,7 @@ void parser::getCommands( std::vector<std::string> words )
 		return;
 	}
 
-	if( words[1] == "any" ) 		return;
+	if( words[0] == "port" && words[1] == "any" ) 	return;
 	else if( words[0] == "protocol" )	this->options[this->section].protocol	= words[1];
 	else if( words[0] == "logfile" )	this->options[this->section].logfile	= words[1];
 	else if( words[0] == "port" )		this->options[this->section].port	= std::stoi( words[1] );

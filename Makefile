@@ -1,3 +1,4 @@
+MAKEFLAGS+= -j +4
 CC=g++ -Wall -pthread -g -o $@	
 DEP=include/*
 OBJ=$(patsubst src/%.cpp,build/%.o,$(wildcard src/*.cpp))
@@ -9,8 +10,8 @@ build/%.o: 	src/%.cpp $(DEP)
 		$(CC) $< -c
 
 clean:
-		sudo rm bin/*   -fr	|| true
+		sudo rm bin/logfile  -f	|| true
 		sudo rm build/* -fr	|| true
 		bash -c "./scripts/defaults.sh"
-		@make
+		@make $(MAKEFLAGS)
 

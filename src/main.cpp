@@ -8,13 +8,11 @@
 //Vector of all ctails
 std::vector<ctail> logfiles;
 
-//Before exit
+//Before exit ensure everything is closed
 void cleanup( int sig )
 {
 	std::cout << "\nRecieved interupt. Code" << sig << ".\n";
-	//Indicate that threads should close
 	threadkiller = true;
-	//Clear logfiles to call destructors
 	logfiles.clear();
 	exit(0);
 }
@@ -26,21 +24,20 @@ int main()
 	signal(SIGINT, cleanup);
 
 	//Create default config file if needed
-	config *conf = new config;
-	conf->createDefaults();
-	delete conf;
+	config.createDefaults();
 
-	//Read config files
-	std::vector<std::string> files;
-	files.push_back( "monitors.conf" );
-	parser p;
-	std::map<std::string,monitor> monitors = p.getConfig( files );
+	//Read config files;
+	std::map<std::string,monitor> monitors = parser.getConfig();
 
-	//List of log files to follow
+	//Find logfile locations from monitors
 	std::vector<std::string> loglocs;
-	loglocs.push_back("/var/log/syslog");
-	loglocs.push_back("/var/log/fail2ban.log");
-	loglocs.push_back("/var/log/auth.log");
+	for( std::map<std::string,monitor>::iterator it = monitors.begin();	it != monitors.end();	it++ )
+	{
+		std::cout << "Found config for " << it->first << std::endl;
+		it->second.print();
+		loglocs.push_back( it->second.logfile );
+	}
+	std::unique( loglocs.begin(), loglocs.end() );
 
 	//Create new ctail per logfile
 	for( std::vector<std::string>::iterator it = loglocs.begin(); it != loglocs.end(); it++ )	logfiles.emplace_back( *it );
