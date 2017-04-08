@@ -3,12 +3,25 @@
 std::map<std::string,monitor> parser::getConfig()
 {
 	std::vector<std::string> files = findfiles();
+	std::vector<std::string> conf, local;
 
-	for( std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++ )
-	{
-		getFile( *it );
+	//Find all .conf and .local files
+        for( std::vector<std::string>::iterator it = files.begin(); it != files.end(); it++ )
+        {
+                if	( it->find(".conf" ) != std::string::npos )	conf.push_back(*it);
+        	else if ( it->find(".local") != std::string::npos )	local.push_back(*it);
 	}
+
+	//Get settings from .conf files
+        for( std::vector<std::string>::iterator it = conf.begin(); it != conf.end(); it++ )	getFile( *it );
+
+	//Overwrite where needed from .local files
+	for( std::vector<std::string>::iterator it = local.begin(); it != local.end(); it++ )	getFile( *it );
+
+	//Fill in any missing data from general settings
 	this->setDefaults();
+
+	//Check monitors for completed config
 	this->checkState();
 
 	//Remove all monitors with incomplete configuration
