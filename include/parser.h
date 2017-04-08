@@ -1,9 +1,4 @@
 #ifndef PARSER
-	#include <iostream>
-	#include <vector>
-	#include <sstream>
-	#include <map>
-	#include <fstream>
 	#include "../include/monitor.h"
 	#include "../include/ipaddress.h"
 	#include "../include/findfiles.h"

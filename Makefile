@@ -1,17 +1,22 @@
-MAKEFLAGS+= -j +4
-CC=g++ -Wall -pthread -g -o $@	
+MAKEFLAGS+=-j4
+CXXFLAGS+=-O0 -Wall -Wextra -pedantic -pthread -g	
+CC=g++ -o $@	
 DEP=include/*
 OBJ=$(patsubst src/%.cpp,build/%.o,$(wildcard src/*.cpp))
 
 bin/logmonitor:	$(OBJ)
-		$(CC) $(OBJ)
+		$(CC) $(CXXFLAGS) $(OBJ)
 
 build/%.o: 	src/%.cpp $(DEP)
-		$(CC) $< -c
+		$(CC) $(CXXFLAGS) -include include/stl.h $< -c
+
+stl:
+		g++ $(CXXFLAGS) include/stl.h
 
 clean:
-		sudo rm bin/logfile  -f	|| true
-		sudo rm build/* -fr	|| true
+		sudo rm bin/logfile -f	 || true
+		sudo rm build/*.o   -f	 || true
+		sudo rm build/config/* -f|| true
 		bash -c "./scripts/defaults.sh"
-		@make $(MAKEFLAGS)
+		@+make
 

@@ -1,10 +1,4 @@
 #ifndef CTAIL
-	#include <sys/inotify.h>
-	#include <unistd.h>
-	#include <fstream>
-	#include <string.h>
-	#include <vector>
-
 	#include "../include/monitor.h"
 
 	#define EVENT_SIZE	( sizeof (struct inotify_event) )

@@ -7,7 +7,7 @@ std::vector<std::string> findfiles( std::string folder )
         std::vector<std::string> files;
 
         //Get pointer to directory for config files
-        curdir.push_back(".");
+        curdir.push_back(folder);
         dirs.push_back( opendir( curdir[0].c_str() ) );
 
         //For each directory

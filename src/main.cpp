@@ -1,9 +1,4 @@
 #include "../include/main.h"
-#include "../include/ctail.h"
-#include "../include/threads.h"
-#include "../include/config.h"
-#include "../include/parser.h"
-#include "../include/monitor.h"
 
 //Vector of all ctails
 std::vector<ctail> logfiles;

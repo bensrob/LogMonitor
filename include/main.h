@@ -1,12 +1,9 @@
 #ifndef MAIN
-	#include <csignal>
-	#include <vector>
-	#include <string>
-	#include <unistd.h>
-	#include <iostream>
-	#include <thread>
-	#include <map>
-	#include <algorithm>
+	#include "../include/ctail.h"
+	#include "../include/threads.h"
+	#include "../include/config.h"
+	#include "../include/parser.h"
+	#include "../include/monitor.h"
 
 	#define MAIN
 #endif

@@ -1,8 +1,4 @@
 #ifndef CONFIG
-	#include <vector>
-	#include <string>
-	#include <fstream>
-
 	struct cfile
 	{
 		cfile( std::string n, unsigned int l, unsigned char *d)

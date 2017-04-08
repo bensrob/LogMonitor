@@ -1,6 +1,4 @@
 #ifndef IPADDRESS
-	#include <string>
-	#include <bitset>
 
 	struct ipaddress
 	{

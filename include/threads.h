@@ -1,8 +1,4 @@
 #ifndef THREADS
-	#include <thread>
-	#include <string>
-	#include <vector>
-	#include <iostream>
 	#include "ctail.h"
 
 	//Flag to indicate threads should close

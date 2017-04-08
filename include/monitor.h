@@ -1,39 +1,35 @@
 #ifndef MONITOR
 
-#include <string>
-#include <vector>
-#include <iostream>
+	struct monitor
+	{
+		std::string 		protocol;	//Protocol to detect.	'Any' for all
 
-struct monitor
-{
-	std::string 		protocol;	//Protocol to detect.	'Any' for all
+		int			port;		//Port to detect.	'0' for all
 
-	int			port;		//Port to detect.	'0' for all
+		int			bantime;	//Length on ban
 
-	int			bantime;	//Length on ban
+		int			count;		//Detections before ban
 
-	int			count;		//Detections before ban
+		int			listentime;	//Timeframe for detections
 
-	int			listentime;	//Timeframe for detections
+		int			permanent;	//Should ban become permanent. 0 for no
+							//'>0' number of bans before permanent
 
-	int			permanent;	//Should ban become permanent. 0 for no
-						//'>0' number of bans before permanent
+		std::string		logfile;	//Location of logfile
 
-	std::string		logfile;	//Location of logfile
+		std::vector<std::string> regex;		//Regex to match
 
-	std::vector<std::string> regex;		//Regex to match
+		std::vector<std::string> ignore;	//Regex to ignore
 
-	std::vector<std::string> ignore;	//Regex to ignore
+		std::vector<unsigned int> ignoreip;	//Ip addresses to ignore.  Only stores
+							//network bits to '&' with detected
 
-	std::vector<unsigned int> ignoreip;	//Ip addresses to ignore.  Only stores
-						//network bits to '&' with detected
+		bool			functional;	//Does the monitor have all the settings set correctly
 
-	bool			functional;	//Does the monitor have all the settings set correctly
+		monitor(): port(0), bantime(0), count(0), listentime(0), permanent(0), functional(false) {}
 
-	monitor(): port(0), bantime(0), count(0), listentime(0), permanent(0), functional(false) {}
+		void print();
+	};
 
-	void print();
-};
-
-#define MONITOR
+	#define MONITOR
 #endif
