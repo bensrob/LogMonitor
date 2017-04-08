@@ -1,12 +1,17 @@
 FEATURES:
 	Database
+	Thread for database interaction
+	Control system for thread
 	Regex
 	Banning
 
 CONFIG:
 	Add command to use to ban
 	protocol and port to vector
-	Show ignored
+	Show Ignored
+	Show Found
+	Show Banned
+	Show Already Banned
 
 CLEANUP:
 	Clean up includes
