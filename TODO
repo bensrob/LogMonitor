@@ -1,5 +1,22 @@
-Clean up includes
-Add exception handling
-Add debug messages
-Handle conflicting config files
-Actually comment
+FEATURES:
+	Database
+	Regex
+	Banning
+
+CONFIG:
+	Add command to use to ban
+	protocol and port to vector
+	Show ignored
+
+CLEANUP:
+	Clean up includes
+	Add exception handling
+	Add debug messages
+	Handle conflicting config files (Currently local overwrites conf, but no priority or ordering otherwise)
+	Actually comment
+	Classes
+	Variable types
+	Address all these damn unused objects everywhere
+
+TESTING:
+	Use fail2ban regex strings and run parallel 
