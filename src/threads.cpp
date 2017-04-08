@@ -3,7 +3,6 @@
 //When true threads will stop working and close
 bool threadkiller = false;
 
-
 //Per logfile threads
 void logthread( ctail *logfile )
 {

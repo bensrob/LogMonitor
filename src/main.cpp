@@ -40,16 +40,18 @@ int main()
 	std::unique( loglocs.begin(), loglocs.end() );
 
 	//Create new ctail per logfile
-	for( std::vector<std::string>::iterator it = loglocs.begin(); it != loglocs.end(); it++ )
+	for( std::vector<std::string>::iterator it = loglocs.begin(); it != loglocs.end(); it++ )	logfiles.emplace_back( *it );
+
+	//Loop through all ctails to initialise and spawn threads
+	for( std::vector<ctail>::iterator it = logfiles.begin(); it != logfiles.end(); it++ )
 	{
-		logfiles.emplace_back( *it );
 		//Attach all monitors for this logfile
 		for( std::map<std::string,monitor>::iterator monit = monitors.begin(); monit != monitors.end(); monit++ )
-			if( monit->second.logfile == *it ) logfiles.back().monitors.push_back( monit->second );
-	}
+			if( it->loc == monit->second.logfile )	it->monitors.push_back( monit->second );
 
-	//Begin a watch thread per logfile
-	for( std::vector<ctail>::iterator it = logfiles.begin(); it != logfiles.end(); it++ )     	std::thread ( logthread, &*it ).detach();
+		//Start thread, passing ctail for a logfile
+		std::thread ( logthread, &*it ).detach();
+	}
 
 	//Main loop
 	//Handles cleaning of old database entries
