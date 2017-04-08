@@ -3,6 +3,7 @@
 #include "../include/threads.h"
 #include "../include/config.h"
 #include "../include/parser.h"
+#include "../include/monitor.h"
 
 //Vector of all ctails
 std::vector<ctail> logfiles;
@@ -24,22 +25,22 @@ int main()
 	//Catch interupt signal and begin cleanup
 	signal(SIGINT, cleanup);
 
-	//Create default config
+	//Create default config file if needed
 	config *conf = new config;
 	conf->createDefaults();
 	delete conf;
 
+	//Read config files
 	std::vector<std::string> files;
 	files.push_back( "monitors.conf" );
 	parser p;
-	p.getConfig( files );
+	std::map<std::string,monitor> monitors = p.getConfig( files );
 
 	//List of log files to follow
 	std::vector<std::string> loglocs;
 	loglocs.push_back("/var/log/syslog");
 	loglocs.push_back("/var/log/fail2ban.log");
 	loglocs.push_back("/var/log/auth.log");
-
 
 	//Create new ctail per logfile
 	for( std::vector<std::string>::iterator it = loglocs.begin(); it != loglocs.end(); it++ )	logfiles.emplace_back( *it );
