@@ -52,7 +52,9 @@ int main()
 	//Handles cleaning of old database entries
 	while( true )
 	{
-		sleep(60);
+		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		sleep(2);
+		memman.print();
 		//Delete all expired database entries
 	}
 }
