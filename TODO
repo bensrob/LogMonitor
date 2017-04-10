@@ -4,6 +4,7 @@ FEATURES:
 	Control system for thread
 	Regex
 	Banning
+	MemManager
 
 CONFIG:
 	Add command to use to ban
