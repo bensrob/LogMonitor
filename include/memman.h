@@ -48,13 +48,21 @@
 
 
 	//Inline functions
-	inline void memman::print()	{ 	for( uint i = 0; i != nextid; i++ ){ //Prints all memory stats
-						tout( i << "\t" << tag[i] << "\t" << num[i] << "\\" << tnum[i] << "\t" << size[i] << "\\" << tsize[i] << "\n"); }}
+	inline void memman::print()
+	{
+		tout( nextid << endl );
+		for( uint i = 0; i != nextid; i++ )	//Prints all memory stats
+		{
+			tout( i << "\t" << tag[i] << "\t" << num[i] << "\\" << tnum[i] << "\t" << size[i] 	\
+				<< "\\" << tsize[i] << "\n");
+		}
+	}
 
 	//Override global new to use memman, passing infomation about the caller
-	inline void* operator new  ( size_t size )     {       return memman.add( size, Memman::loc );         }
+	inline void* operator new  ( size_t size )     {       return memman.add( size, Memman::loc );		       }
 	inline void operator delete ( void* todel )    {       memman.del(todel);                              }
 	#define new (Memman::loc=__PRETTY_FUNCTION__,0)?0:new
 
 #define MEMMAN
 #endif
+

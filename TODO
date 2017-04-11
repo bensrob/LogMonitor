@@ -1,4 +1,5 @@
 FEATURES:
+	SPINLOCK TO MUTEX
 	Database
 	Thread for database interaction
 	Control system for thread
