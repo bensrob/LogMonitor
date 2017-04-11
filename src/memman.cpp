@@ -23,13 +23,20 @@ void* memman::add( std::size_t insize, char* intag )
 	memhead *head = (memhead*) memset( malloc( fullsize ), 0, fullsize );
 
 	// Find if tag exists
-	uint id = 0;
-	while( id != nextid && strcmp( intag, tag[id] ) ){ id++; }
+	uint id;
+//	while( id != nextid && strcmp( intag, tag[id] ) ){ id++; }
+	for( id=0; id != nextid; id++ )
+	{
+		int i = 0;
+		while( i != TAG-1 && tag[id][i] == intag[i] ) i++;
+		if( i == TAG-1 || tag[id][i] == '\0' || intag[i] == '\0' )	break;
+	}
 
 	if( id == nextid )
 	{
 		nextid++;
 		strcpy( tag[id],  intag );
+		tag[id][TAG-1] = '\0';
 	}
 
 

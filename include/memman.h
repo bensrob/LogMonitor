@@ -10,7 +10,7 @@
 #ifndef MEMMAN
 	#define uint unsigned int	//Dont judge me (for alignment, neatness and laziness reasons)
 	#define MAX 1024		//Maximum number of ids
-	#define TAG 16			//Characters allocated for a tag detailing alloc reason
+	#define TAG 20			//Characters allocated for a tag detailing alloc reason
 //	namespace Memman{ static std::string loc; }	//Location that allocation was called from
 
 	struct memhead
@@ -52,9 +52,10 @@
 	//Inline functions
 	inline void memman::print()
 	{
+		tout( endl );
 		for( uint i = 0; i != nextid; i++ )	//Prints all memory stats
 		{
-			tout( i << "\t" << tag[i] << "\t" << num[i] << "\\" << tnum[i] << "\t" << size[i] 	\
+			tout( 	tag[i] << "\t" << num[i] << "\\" << tnum[i] << "\t" << size[i] 	\
 				<< "\\" << tsize[i] << "\n");
 		}
 	}

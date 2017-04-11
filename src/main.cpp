@@ -52,9 +52,8 @@ int main()
 	//Handles cleaning of old database entries
 	while( true )
 	{
-		new int;
 		memman.print();
-		sleep(5);
+		sleep(10);
 		//Delete all expired database entries
 	}
 }
