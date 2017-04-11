@@ -1,9 +1,9 @@
 MAKEFLAGS+=-j4
-CXXFLAGS+=-O0 -Wall -Wextra -pedantic -pthread -g -fno-sized-deallocation
+CXXFLAGS+=-O0 -Wall -Wextra -pedantic -pthread -g -fno-sized-deallocation -Wno-unused-variable
 CC=g++ -o $@ $(CXXFLAGS)
 DEP=include/* pch/pch.h.gch
 OBJ=$(patsubst src/%.cpp,build/%.o,$(wildcard src/*.cpp))
-INC=-include pch/pch.h -include include/memman.h
+INC=-include pch/pch.h -include include/memman.h -include include/tout.h
 
 bin/logmonitor:	$(OBJ)
 		$(CC) $(OBJ)
@@ -14,10 +14,14 @@ build/%.o: 	src/%.cpp $(DEP)
 pch/pch.h.gch:	pch/pch.h
 		$(CC) pch/pch.h
 
+fix:
+		grep -rl endl | grep -v Makefile | xargs sed -i 's/std::endl/endl/g'
+
 clean:
 		sudo rm bin/logfile -f	 || true
 		sudo rm build/*.o   -f	 || true
 		sudo rm build/config/* -f|| true
+		@+make fix
 		bash -c "./scripts/defaults.sh"
 		@+make
 

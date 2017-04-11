@@ -28,7 +28,7 @@ int main()
 	std::vector<std::string> loglocs;
 	for( std::map<std::string,monitor>::iterator it = monitors.begin();	it != monitors.end();	it++ )
 	{
-		std::cout << "Found config for " << it->first << std::endl;
+		std::cout << "Found config for " << it->first << endl;
 		it->second.print();
 		loglocs.push_back( it->second.logfile );
 	}
@@ -52,7 +52,7 @@ int main()
 	//Handles cleaning of old database entries
 	while( true )
 	{
-		std::cout << __PRETTY_FUNCTION__ << std::endl;
+		std::cout << __PRETTY_FUNCTION__ << endl;
 		sleep(2);
 		memman.print();
 		//Delete all expired database entries

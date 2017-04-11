@@ -8,7 +8,7 @@ void* memman::add( std::size_t size, std::string intag )
 	while( this->alloc == true )	sleep(1);
 	this->alloc = true;
 
-	std::cout << "ALLOC!\t" << intag << std::endl;
+	std::cout << "ALLOC!\t" << intag << endl;
 	//Allocate and zero memory
 	int fullsize = size + sizeof(memhead);
 	memhead *head = (memhead*) memset( malloc( fullsize ), 0, fullsize );
@@ -49,7 +49,7 @@ void memman::del ( void* todel )
 	while( this->decon == true )    sleep(1);
         this->decon = true;
 
-	std::cout << "DEALLOC!\t" << std::endl;
+	std::cout << "DEALLOC!\t" << endl;
 	//Move pointer onto header
 	memhead* head = (memhead*)todel-1;
 
