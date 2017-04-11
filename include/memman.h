@@ -11,7 +11,7 @@
 	#define uint unsigned int	//Dont judge me (for alignment, neatness and laziness reasons)
 	#define MAX 1024		//Maximum number of ids
 	#define TAG 16			//Characters allocated for a tag detailing alloc reason
-	namespace Memman{ static std::string loc; }	//Location that allocation was called from
+//	namespace Memman{ static std::string loc; }	//Location that allocation was called from
 
 	struct memhead
 	{
@@ -29,9 +29,12 @@
 			~memman();
 
 		//Public Functions
-		static	void*	add	( std::size_t, std::string );	//New allocation in tag group
+		static	void*	add	( std::size_t, char* );	//New allocation in tag group
 		static	void	del	( void* );			//Free specified object
 		inline 	void	print	();				//Prints current stats
+		static  char*	loc;                	//Location allocation was called from
+		inline	void	lock();
+		inline  void	unlock();
 	private:
 		//Data
 		static	memhead	*start;			//First header
@@ -42,8 +45,7 @@
                 static  uint    tsize[MAX];             //Total size
                 static  uint    tnum [MAX];             //Total number of allocs
 		static	char	tag  [MAX][TAG];	//Name specified when recieving an id
-		static	bool	alloc;			//Indicates class is alloc
-		static	bool	decon;			//Indicates deconstruction
+		static  std::mutex rwlock;              //Locked on read/write operations
 	} static memman;
 
 
@@ -56,11 +58,13 @@
 				<< "\\" << tsize[i] << "\n");
 		}
 	}
+	inline void memman::lock(){	rwlock.lock();		}
+        inline void memman::unlock(){	rwlock.unlock();	}
 
 	// Override global new to use memman, passing infomation about the caller
-	inline void* operator new  ( size_t size )     {       return memman.add( size, Memman::loc );          }
-	inline void operator delete ( void* todel )    {       memman.del(todel);                               }
-	#define new (Memman::loc=__PRETTY_FUNCTION__,0)?0:new
+	inline void* operator new  ( size_t size  )	{       return memman.add( size, memman.loc );           }
+	inline void operator delete ( void* todel )	{       memman.del(todel);                               }
+	#define new (memman.lock(),memman.loc=(char*)__PRETTY_FUNCTION__,0)?0:new
 
 #define MEMMAN
 #endif
