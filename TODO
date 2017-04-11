@@ -1,3 +1,8 @@
+BUGS:
+	new #define broken
+	tout is no longer thread safe after moving mutex location
+	Random segfault on exit
+
 FEATURES:
 	SPINLOCK TO MUTEX
 	Database

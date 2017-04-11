@@ -52,9 +52,6 @@ int main()
 	//Handles cleaning of old database entries
 	while( true )
 	{
-		tout( __PRETTY_FUNCTION__ << endl );
-		new int;
-		memman.add( 4, "test" );
 		memman.print();
 		sleep(5);
 		//Delete all expired database entries

@@ -25,32 +25,31 @@
 	{
 	public:
 		//(Con|De)structor
-		inline	memman():	start(0), end(0), nextid(0), alloc(0), decon(0){}
+		inline	memman(){}
 			~memman();
 
 		//Public Functions
-			void*	add	( std::size_t, std::string );	//New allocation in tag group
-			void	del	( void* );			//Free specified object
+		static	void*	add	( std::size_t, std::string );	//New allocation in tag group
+		static	void	del	( void* );			//Free specified object
 		inline 	void	print	();				//Prints current stats
 	private:
 		//Data
-			memhead	*start;			//First header
-			memhead	*end;			//Last header
-			uint	nextid;			//Next free id number
-			uint	size [MAX];		//Current size of allocations per id
-			uint	num  [MAX];		//Current number of allocs per id
-                        uint    tsize[MAX];             //Total size
-                        uint    tnum [MAX];             //Total number of allocs
-			char	tag  [MAX][TAG];	//Name specified when recieving an id
-			bool	alloc;			//Indicates class is alloc
-			bool	decon;			//Indicates deconstruction
-	} 	static memman;
+		static	memhead	*start;			//First header
+		static	memhead	*end;			//Last header
+		static	uint	nextid;			//Next free id number
+		static	uint	size [MAX];		//Current size of allocations per id
+		static	uint	num  [MAX];		//Current number of allocs per id
+                static  uint    tsize[MAX];             //Total size
+                static  uint    tnum [MAX];             //Total number of allocs
+		static	char	tag  [MAX][TAG];	//Name specified when recieving an id
+		static	bool	alloc;			//Indicates class is alloc
+		static	bool	decon;			//Indicates deconstruction
+	} static memman;
 
 
 	//Inline functions
 	inline void memman::print()
 	{
-		tout( nextid << endl );
 		for( uint i = 0; i != nextid; i++ )	//Prints all memory stats
 		{
 			tout( i << "\t" << tag[i] << "\t" << num[i] << "\\" << tnum[i] << "\t" << size[i] 	\
@@ -58,9 +57,9 @@
 		}
 	}
 
-	//Override global new to use memman, passing infomation about the caller
-	inline void* operator new  ( size_t size )     {       return memman.add( size, Memman::loc );		       }
-	inline void operator delete ( void* todel )    {       memman.del(todel);                              }
+	// Override global new to use memman, passing infomation about the caller
+	inline void* operator new  ( size_t size )     {       return memman.add( size, Memman::loc );          }
+	inline void operator delete ( void* todel )    {       memman.del(todel);                               }
 	#define new (Memman::loc=__PRETTY_FUNCTION__,0)?0:new
 
 #define MEMMAN
