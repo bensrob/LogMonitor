@@ -6,7 +6,7 @@ std::vector<ctail> logfiles;
 //Before exit ensure everything is closed
 void cleanup( int sig )
 {
-	std::cout << "\nRecieved interupt. Code" << sig << ".\n";
+	tout( "\nRecieved interupt. Code" << sig << ".\n" );
 	threadkiller = true;
 	logfiles.clear();
 	exit(0);
@@ -28,7 +28,7 @@ int main()
 	std::vector<std::string> loglocs;
 	for( std::map<std::string,monitor>::iterator it = monitors.begin();	it != monitors.end();	it++ )
 	{
-		std::cout << "Found config for " << it->first << endl;
+		tout( "Found config for " << it->first << endl );
 		it->second.print();
 		loglocs.push_back( it->second.logfile );
 	}
@@ -52,7 +52,7 @@ int main()
 	//Handles cleaning of old database entries
 	while( true )
 	{
-		std::cout << __PRETTY_FUNCTION__ << endl;
+		tout(  __PRETTY_FUNCTION__ << endl );
 		sleep(2);
 		memman.print();
 		//Delete all expired database entries

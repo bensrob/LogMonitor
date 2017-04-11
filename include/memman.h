@@ -48,8 +48,8 @@
 
 
 	//Inline functions
-	inline void memman::print()	{ 	for( uint i = 0; i != nextid; i++ ) //Prints all memory stats
-						std::cout << i << "\t" << tag[i] << "\t" << num[i] << "\\" << tnum[i] << "\t" << size[i] << "\\" << tsize[i] << "\n"; }
+	inline void memman::print()	{ 	for( uint i = 0; i != nextid; i++ ){ //Prints all memory stats
+						tout( i << "\t" << tag[i] << "\t" << num[i] << "\\" << tnum[i] << "\t" << size[i] << "\\" << tsize[i] << "\n"); }}
 
 	//Override global new to use memman, passing infomation about the caller
 	inline void* operator new  ( size_t size )     {       return memman.add( size, Memman::loc );         }

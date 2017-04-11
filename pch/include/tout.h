@@ -31,9 +31,6 @@
 	class tout
 	{
 	public:
-	        // Indicated write in progress
-	        static std::mutex writelock;
-
 		// Template capture to pass to cout
 		// Does NOT work with endl so using defines to switch to '/n'
 		// Returns reference to itself so operator << can be chained
@@ -46,7 +43,7 @@
 	} static tout;
 
 	// Apply lock to tout
-	#define tout(x)		LOCK( tout.writelock, tout << x )
+	#define tout(x)		NEWLOCK( writelock, tout << x )
 
 	// Define endl as '\n'
 	#define QUOTE(x) #x

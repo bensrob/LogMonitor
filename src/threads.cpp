@@ -23,7 +23,7 @@ void logthread( ctail *logfile )
 				it++	    )
 			{
 				//Output log content
-				std::cout << *it << "\n";
+				tout( *it << "\n" );
 			}
 		}
 	}
