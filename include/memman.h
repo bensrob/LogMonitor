@@ -25,7 +25,7 @@
 	{
 	public:
 		//(Con|De)structor
-		inline	memman(){}
+		inline	memman(){	strcpy( tag[0], "UNSET" );	}
 			~memman();
 
 		//Public Functions

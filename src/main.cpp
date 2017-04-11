@@ -19,7 +19,9 @@ int main()
 	signal(SIGINT, cleanup);
 
 	//Create default config file if needed
-	config.createDefaults();
+	config *conf = new config;
+	conf->createDefaults();
+	delete conf;
 
 	//Read config files;
 	std::map<std::string,monitor> monitors = parser.getConfig();

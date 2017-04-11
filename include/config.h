@@ -38,7 +38,7 @@
 				else input.close();
 			}
 		}
-	} static config;
+	};
 
 	#define CONFIG
 #endif
