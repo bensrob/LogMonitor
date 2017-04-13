@@ -63,8 +63,10 @@
         inline void memman::unlock(){	rwlock.unlock();	}
 
 	// Override global new to use memman, passing infomation about the caller
-	inline void* operator new  ( size_t size  )	{       return memman.add( size, memman.loc );           }
-	inline void operator delete ( void* todel )	{       memman.del(todel);                               }
+	inline void* operator new    ( size_t size )	{       return memman.add( size, memman.loc );           }
+	inline void* operator new[]  ( size_t size )	{       return memman.add( size, memman.loc );           }
+	inline void operator delete  ( void* todel )	{       memman.del(todel);                               }
+	inline void operator delete[]( void* todel )    {       memman.del(todel);                               }
 	#define new (memman.lock(),memman.loc=(char*)__PRETTY_FUNCTION__,0)?0:new
 
 #define MEMMAN

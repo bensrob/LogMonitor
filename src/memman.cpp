@@ -9,7 +9,7 @@ uint    memman::num  [MAX]	= {0};  	//Current number of allocs per id
 uint    memman::tsize[MAX]	= {0};   	//Total size
 uint    memman::tnum [MAX]	= {0};          //Total number of allocs
 char    memman::tag  [MAX][TAG]	= {0};         	//Name specified when recieving an id
-char*	memman::loc		= "UNSET";
+char*	memman::loc		= (char*)"UNSET";
 std::mutex memman::rwlock;
 // New allocation
 // Allocates memory, assigned correct header options and adds to tracking
@@ -17,7 +17,6 @@ std::mutex memman::rwlock;
 void* memman::add( std::size_t insize, char* intag )
 {
 	//Mutex lock applied before entry to protect loc value for intag
-	tout( intag << endl );
 
 	// Allocate and zero memory
 	int fullsize = insize + sizeof(memhead);
@@ -59,7 +58,7 @@ void* memman::add( std::size_t insize, char* intag )
 	if(head->prev) head->prev->next = head;
 
 	//Unlock
-	loc = "UNSET";
+	loc = (char*)"UNSET";
 	rwlock.unlock();
 
 	// Return pointer to data location

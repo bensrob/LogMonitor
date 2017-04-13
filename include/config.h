@@ -14,6 +14,11 @@
 		unsigned int 	len;
 		std::string	name;
 		unsigned char 	*data;
+
+		~cfile()
+		{
+//			delete this->data;
+		}
 	};
 
 	struct config

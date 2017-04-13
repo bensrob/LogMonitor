@@ -1,4 +1,5 @@
 BUGS:
+	cfile segfaults on delete
 	tout is no longer thread safe after moving mutex location
 	Random segfault on exit
 
@@ -8,7 +9,6 @@ FEATURES:
 	Control system for thread
 	Regex
 	Banning
-	MemManager
 
 CONFIG:
 	Add command to use to ban
@@ -26,7 +26,6 @@ CLEANUP:
 	Actually comment
 	Classes
 	Variable types
-	Address all these damn unused objects everywhere
 
 TESTING:
 	Use fail2ban regex strings and run parallel 

@@ -37,5 +37,7 @@ std::vector<std::string> findfiles( std::string folder )
                         cur = readdir(dirs[i]);
                 }
         }
+	for( std::vector<DIR*>::iterator it = dirs.begin(); it != dirs.end(); it++ )	closedir(*it);
+
 	return files;
 }
