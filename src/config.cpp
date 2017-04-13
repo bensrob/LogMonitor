@@ -12,6 +12,6 @@ config::config()
 
 config::~config()
 {
-	delete defaults->clear();
+	defaults->clear();
 	delete defaults;
 }
