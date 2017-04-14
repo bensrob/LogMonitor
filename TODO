@@ -16,7 +16,6 @@ CONFIG:
 	Show Already Banned
 
 CLEANUP:
-	Clean up includes
 	Add exception handling
 	Add debug messages
 	Handle conflicting config files (Currently local overwrites conf, but no priority or ordering otherwise)

@@ -4,7 +4,7 @@ CC=g++ -o $@ $(CXXFLAGS)
 DEP=include/* pch/pch.h.gch
 PCH=pch/pch.h pch/include/*
 OBJ=$(patsubst src/%.cpp,build/%.o,$(wildcard src/*.cpp))
-INC=-include pch/pch.h
+INC=-include pch/pch.h -include include.h
 
 bin/logmonitor:	$(OBJ)
 		$(CC) $(OBJ)
