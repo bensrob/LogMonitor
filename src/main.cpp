@@ -36,6 +36,9 @@ int main()
 	}
 	std::unique( loglocs.begin(), loglocs.end() );
 
+	// Reserve memory for ctails
+	logfiles.reserve( loglocs.size() );
+
 	//Create new ctail per logfile
 	for( std::vector<std::string>::iterator it = loglocs.begin(); it != loglocs.end(); it++ )	logfiles.emplace_back( *it );
 

@@ -1,6 +1,4 @@
 BUGS:
-	Found issue with ctail calls 
-		Multiple calls to same logfiles not working due to preexisting watch on file
 
 FEATURES:
 	Database
