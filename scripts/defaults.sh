@@ -24,7 +24,7 @@ for filename in build/config/*; do
 	DATA=$(awk "/{/,/}/{print}" $filename | sed "s/;//g" | sed "s/unsigned char.*= //g" | tr -d '\n' | sed "s/  / /g" )
 
 	echo -e "\n\ttemp = new unsigned char[$SIZE] $DATA;"				>> src/config.cpp
-	echo -e "\tthis->defaults->push_back( cfile(\"$NAME\", $SIZE, temp) );"	>> src/config.cpp
+	echo -e "\tthis->defaults->emplace_back( \"$NAME\", $SIZE, temp );"	>> src/config.cpp
 	echo -e "\tdelete[] temp;"						>> src/config.cpp
 done
-echo -e "}\n\nconfig::~config()\n{\n\tdelete defaults;\n}" 			>> src/config.cpp
+echo -e "}\n\nconfig::~config()\n{\n\tdefaults->clear();\n\tdelete defaults;\n}" 			>> src/config.cpp

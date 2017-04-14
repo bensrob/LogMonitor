@@ -17,7 +17,8 @@
 
 		~cfile()
 		{
-//			delete this->data;
+			delete this->data;
+			this->data = NULL;
 		}
 	};
 
