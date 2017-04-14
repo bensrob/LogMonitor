@@ -28,9 +28,11 @@
 
 
 	// Threadsafe (C)Output
+	static std::mutex toutlock;
 	class tout
 	{
 	public:
+		tout()	{	toutlock.unlock();	}
 		// Template capture to pass to cout
 		// Does NOT work with endl so using defines to switch to '/n'
 		// Returns reference to itself so operator << can be chained
@@ -43,7 +45,7 @@
 	} static tout;
 
 	// Apply lock to tout
-	#define tout(x)		NEWLOCK( writelock, tout << x )
+	#define tout(x)		LOCK( toutlock, tout << x )
 
 	// Define endl as '\n'
 	#define QUOTE(x) #x

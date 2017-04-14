@@ -1,7 +1,4 @@
 BUGS:
-	cfile segfaults on delete
-	tout is no longer thread safe after moving mutex location
-	Random segfault on exit
 
 FEATURES:
 	Database
