@@ -42,7 +42,10 @@ void ctail::init()
 				this->wd = inotify_add_watch( fd, this->loc.c_str(), IN_MODIFY );
 
 				// If watch created successfully
-				if( wd >=0 )	this->initialised = true;
+				if( wd >=0 )
+				{
+					this->initialised = true;
+				}
 				else
 				{
 					close( this->fd );
@@ -55,34 +58,39 @@ void ctail::init()
 	}
 
 	// If there was an error during initalisation
-	if( this->initialised == false )	tout( "Error reading " << loc << endl );
+	if( this->initialised == false ){	tout( "Error reading " << loc << endl );	}
 }
 
 // Wait for change to logfile, and return a vector of new lines
 std::vector<std::string> ctail::watch()
 {
-	// Initialise buffer
 	std::vector<std::string> returnbuffer;
-	char buffer[BUF_LEN];
 
-	// Wait for new lines
-	int length = read( this->fd, buffer, BUF_LEN );
-
-	// If there are file changes
-	if( length >= 0 )
+	// If initialised
+	if( this-> initialised )
 	{
-		// Clear error bits from input stream
-		this->log.clear();
+		// Initialise buffer
+		char buffer[BUF_LEN];
 
-		// While end of file has not been reached
-		while( !this->log.eof() )
+		// Wait for new lines
+		int length = read( this->fd, buffer, BUF_LEN );
+
+		// If there are file changes
+		if( length >= 0 )
 		{
-			// Get line from logfile
-			std::string line;
-			getline(this->log,line);
+			// Clear error bits from input stream
+			this->log.clear();
 
-			// If line is not empty add to return vector
-			if( line.length() > 0 )	returnbuffer.push_back(line);
+			// While end of file has not been reached
+			while( !this->log.eof() )
+			{
+				// Get line from logfile
+				std::string line;
+				getline(this->log,line);
+
+				// If line is not empty add to return vector
+				if( line.length() > 0 )	returnbuffer.push_back(line);
+			}
 		}
 	}
 	// Return vector of new lines
