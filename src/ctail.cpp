@@ -66,7 +66,7 @@ std::vector<std::string> ctail::watch()
 	char buffer[BUF_LEN];
 
 	// Wait for new lines
-	read( this->fd, buffer, BUF_LEN );
+	int length = read( this->fd, buffer, BUF_LEN );
 
 	// If there are file changes
 	if( length >= 0 )
