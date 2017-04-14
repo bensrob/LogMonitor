@@ -52,6 +52,7 @@ void parser::getFile( std::string filename )
 			file.getline( buffer, 1024 );
 			getCommands( getWords( buffer ) );
 		}
+		file.close();
 	}
 }
 
