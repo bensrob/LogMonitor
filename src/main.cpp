@@ -24,7 +24,9 @@ int main()
 	delete conf;
 
 	//Read config files;
-	std::map<std::string,monitor> monitors = parser.getConfig();
+	parser *parse = new parser;
+	std::map<std::string,monitor> monitors = parse->getConfig();
+	delete parse;
 
 	//Find logfile locations from monitors
 	std::vector<std::string> loglocs;

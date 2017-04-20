@@ -1,5 +1,10 @@
 #include "../include/config.h"
 
+// Autocreated with scripts/defaults.sh
+
+// Contains all default config files
+
+
 config::config()
 {
 	this->defaults = new std::vector<cfile>;

@@ -12,6 +12,8 @@ done
 
 #Begin config.cpp
 echo -e "#include \"../include/config.h\"\n" 			>  src/config.cpp
+echo -e "// Autocreated with scripts/defaults.sh\n"		>> src/config.cpp
+echo -e "// Contains all default config files\n\n"		>> src/config.cpp
 echo -e "config::config()\n{"  					>> src/config.cpp
 echo -e "\tthis->defaults = new std::vector<cfile>;" 		>> src/config.cpp
 echo -e "\tunsigned char *temp;" 				>> src/config.cpp

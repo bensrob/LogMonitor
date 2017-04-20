@@ -1,5 +1,6 @@
 #ifndef MONITOR
 
+	// Struct to store all config per monitor
 	struct monitor
 	{
 		std::string 		protocol;	//Protocol to detect.	'Any' for all
@@ -26,8 +27,10 @@
 
 		bool			functional;	//Does the monitor have all the settings set correctly
 
+		// Constructor and initialisation
 		monitor(): port(0), bantime(0), count(0), listentime(0), permanent(0), functional(false) {}
 
+		// Print all config stored in monitor
 		void print();
 	};
 
