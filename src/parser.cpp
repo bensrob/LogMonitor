@@ -107,7 +107,6 @@ void parser::checkState()
                 if( it->second.listentime < 1 )         it->second.functional = false;
                 if( it->second.permanent  < 0 )         it->second.functional = false;
 		if( it->second.regex.empty()  )		it->second.functional = false;
-	tout( it->first << " : " << it->second.functional << endl );
         }
 
 }
@@ -161,7 +160,7 @@ void parser::getCommands( std::vector<std::string> words )
 	}
 
 	// If option configured with 'any' ignore
-	if( words[1] == "any" ) 	return;
+	if( words[0] == "port" && words[1] == "any" ) 	return;
 
 	// Assign config from word list
 	else if( words[0] == "protocol" )	this->options[this->section].protocol	= words[1];
